@@ -47,4 +47,8 @@ model Event {
   creator     User      @relation(fields: [creatorId], references: [id])
   clubId      Int?
   club        Club?     @relation(fields: [clubId], references: [id])
+
+  @@index([start])
+  @@index([clubId])
+  @@index([creatorId])
 }
