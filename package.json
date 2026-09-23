@@ -7,11 +7,12 @@
   "author": "",
   "scripts": {
     "dev": "next",
-    "build": "next build",
+    "build": "npm run generate:nexus:build && next build",
     "start": "next start",
     "generate": "npm -s run generate:prisma && npm -s run generate:nexus",
     "generate:prisma": "npx prisma generate",
     "generate:nexus": "dotenv -e .env -- ts-node -r tsconfig-paths/register --transpile-only -P nexus.tsconfig.json src/pages/api/graphql",
+    "generate:nexus:build": "ts-node -r tsconfig-paths/register --transpile-only -P nexus.tsconfig.json src/pages/api/graphql",
     "ts-node": "ts-node --compiler-options \"{\\\"module\\\":\\\"commonjs\\\"}\"",
     "migrate": "dotenv -e .env -- npx prisma migrate dev"
   },
