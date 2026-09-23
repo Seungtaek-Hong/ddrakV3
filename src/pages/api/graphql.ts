@@ -27,6 +27,7 @@ export const schema = makeSchema({
     typegen: path.join(process.cwd(), 'src/shared/generated/nexus-typegen.ts'),
     schema: path.join(process.cwd(), 'src/shared/generated/schema.graphql'),
   },
+  shouldGenerateArtifacts: true,
 })
 
 export const config = {
