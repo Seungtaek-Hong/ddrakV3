@@ -7,7 +7,7 @@
   "author": "",
   "scripts": {
     "dev": "next",
-    "build": "npm run generate:nexus:build && next build",
+    "build": "npx prisma generate && npm run generate:nexus:build && next build",
     "start": "next start",
     "generate": "npm -s run generate:prisma && npm -s run generate:nexus",
     "generate:prisma": "npx prisma generate",
