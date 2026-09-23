@@ -5,6 +5,9 @@
   "keywords": [],
   "license": "MIT",
   "author": "",
+  "engines": {
+    "node": "18.x"
+   },
   "scripts": {
     "dev": "next",
     "build": "npx prisma generate && npm run generate:nexus:build && next build",
