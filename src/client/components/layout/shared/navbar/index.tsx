@@ -3,6 +3,7 @@ import WeekNavigator from './WeekNavigator'
 import SwitchCalendarButtons from '@components/layout/shared/SwitchCalendarButtons'
 import { IoIosMenu } from 'react-icons/io'
 import { calendarHeaderDateString } from '@client/utils'
+import { queryClient } from '@client/shared/react-query'
 
 import { useAccount, useGlobal } from '@client/hooks'
 import { PATHNAME } from '@client/consts'
@@ -24,6 +25,7 @@ export default function Navbar({ isMobile, setShowSidebar }: Props) {
 
   function handleLogout() {
     logout()
+    queryClient.clear()
     enableDefaultMode()
   }
 
