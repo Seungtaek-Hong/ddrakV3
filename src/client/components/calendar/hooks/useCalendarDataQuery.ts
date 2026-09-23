@@ -16,7 +16,7 @@ export function useCalendarDataQuery() {
     [
       'events',
       {
-        from: new Date(date.getFullYear(), date.getMonth() - 3, 1).toISOString(),
+        from: new Date(date.getFullYear(), date.getMonth() - 1, 1).toISOString(),
         to: new Date(date.getFullYear(), date.getMonth() + 2, 1).toISOString(),
       },
     ],
@@ -42,7 +42,7 @@ export function useCalendarDataQuery() {
     [
       'events',
       {
-        from: new Date(date.getFullYear(), date.getMonth() - 3, 1).toISOString(),
+        from: new Date(date.getFullYear(), date.getMonth() - 1, 1).toISOString(),
         to: new Date(date.getFullYear(), date.getMonth() + 2, 1).toISOString(),
       },
     ],
