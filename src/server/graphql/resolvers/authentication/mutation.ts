@@ -130,7 +130,7 @@ export const AuthenticationMutation = extendType({
       },
     })
 
-    t.field('updateUser', {
+        t.field('updateUser', {
       type: 'User',
       args: {
         id: nonNull(intArg()),
@@ -138,6 +138,17 @@ export const AuthenticationMutation = extendType({
         password: stringArg(),
       },
       resolve: async (_, { id, name, password }, ctx) => {
+        const requester = await prisma.user.findUnique({
+          where: { id: ctx.userId },
+        })
+
+        /** 본인이거나 isSuper여야만 비밀번호/이름 변경 허용 */
+        if (!requester || (requester.id !== id && !requester.isSuper)) {
+          throw new ApolloError('권한이 없습니다', null, {
+            extraCode: 'FORBIDDEN',
+          })
+        }
+
         let hashedPassword = undefined
 
         if (password) {

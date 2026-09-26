@@ -9,6 +9,6 @@ export const globalState = atom<Global>({
   key: 'global',
   default: {
     date: new Date(),
-    mode: 'default',
+    mode: 'clubCalendar',
   },
 })

@@ -1,6 +1,5 @@
 import Link from 'next/link'
 import WeekNavigator from './WeekNavigator'
-import SwitchCalendarButtons from '@components/layout/shared/SwitchCalendarButtons'
 import { IoIosMenu } from 'react-icons/io'
 import { calendarHeaderDateString } from '@client/utils'
 import { queryClient } from '@client/shared/react-query'
@@ -39,7 +38,6 @@ export default function Navbar({ isMobile, setShowSidebar }: Props) {
           </h2>
         </div>
         <div className={cx('right-area')}>
-          {!isMobile && isLoggedIn && me?.club && mode !== 'setCalendar' && <SwitchCalendarButtons />}
           {isMobile ? (
             <div className={cx('icon-wrapper')} onClick={() => setShowSidebar(true)}>
               <IoIosMenu size={35} />

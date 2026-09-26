@@ -3,9 +3,9 @@ import { Input, Select } from '@client/components/form'
 
 import React, { useState } from 'react'
 import { useRouter } from 'next/router'
-import { useAccount } from '@client/hooks'
-import { useQuery, useMutation } from 'react-query'
-import { signupMutation, clubsQuery } from '@client/shared/queries'
+import { useAccount, useClubs } from '@client/hooks'
+import { useMutation } from 'react-query'
+import { signupMutation } from '@client/shared/queries'
 
 import { InputChangeParams } from '@shared/types'
 import { PATHNAME, REG_EXP } from '@root/src/client/consts'
@@ -31,7 +31,7 @@ export default function RegisterPageComponent() {
   const router = useRouter()
   const { isLoggedIn, me } = useAccount()
 
-  const { data } = useQuery('clubs', clubsQuery)
+  const { data } = useClubs()
   const clubs = data?.clubs ?? []
   const clubOptions = clubs.map(club => ({
     value: club.id,

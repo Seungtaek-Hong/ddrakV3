@@ -1,5 +1,3 @@
-import SwitchCalendarButtons from '@components/layout/shared/SwitchCalendarButtons'
-
 import { useAccount, useMenuItems, useWindowSize } from '@client/hooks'
 
 import classNames from 'classnames/bind'
@@ -14,8 +12,6 @@ export default function Menu({ setShowSidebar }: Props) {
   const { me, isMeLoading, isLoggedIn, userType } = useAccount()
   const { menuItems } = useMenuItems()
   const menuContent = menuItems[userType]
-  const { width } = useWindowSize()
-  const isMobile = width <= 1024
 
   return (
     <>
@@ -25,7 +21,7 @@ export default function Menu({ setShowSidebar }: Props) {
             <h2>
               {isLoggedIn ? `${me?.club?.name ?? ''} ${me?.isAdmin || me?.isSuper ? ' 관리자' : ''}` : '환영합니다!'}
             </h2>
-            {isMobile && isLoggedIn && me?.club && <SwitchCalendarButtons isMobile setShowSidebar={setShowSidebar} />}
+
           </div>
           <div className={cx('body')}>
             {menuContent.map(item => (

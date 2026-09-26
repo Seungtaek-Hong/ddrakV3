@@ -1,7 +1,5 @@
 import { useEffect, useState } from 'react'
-import { useAccount, useCalendar, useGlobal } from '@client/hooks'
-import { useQuery } from 'react-query'
-import { clubsQuery } from '@client/shared/queries'
+import { useAccount, useCalendar, useClubs, useGlobal } from '@client/hooks'
 
 import classNames from 'classnames/bind'
 import styles from './style/SectionMenu.module.css'
@@ -26,7 +24,7 @@ export default function DragEventMenu() {
   const { isLoggedIn, me } = useAccount()
   const { setDraggableDuration } = useCalendar()
   const { mode } = useGlobal()
-  const { data } = useQuery('clubs', clubsQuery, { enabled: isLoggedIn && mode === 'rental' })
+  const { data } = useClubs(isLoggedIn && mode === 'rental')
   const clubs = data?.clubs?.filter(club => club.id !== me?.club?.id) ?? []
 
   function handleDurationChange(e: React.ChangeEvent<HTMLSelectElement>) {

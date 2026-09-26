@@ -2,9 +2,7 @@ import { DateTimePicker } from '@components/form'
 import { IoChevronBack, IoChevronForward } from 'react-icons/io5'
 
 import React, { useEffect, useState } from 'react'
-import { useAccount, useCalendar, useEvent, useGlobal, useWindowSize } from '@client/hooks'
-import { useQuery } from 'react-query'
-import { clubsQuery } from '@client/shared/queries'
+import { useAccount, useCalendar, useClubs, useEvent, useGlobal, useWindowSize } from '@client/hooks'
 
 import classNames from 'classnames/bind'
 import styles from './style/SectionMenu.module.css'
@@ -19,7 +17,7 @@ export default function AddNewEventsSlot() {
   const isMobile = width <= 670
   const isRental = mode === 'rental'
   const { me } = useAccount()
-  const { data } = useQuery('clubs', clubsQuery, { enabled: isRental })
+  const { data } = useClubs(isRental)
   const clubs = data?.clubs?.filter(club => club.id !== me?.club?.id)
   const clubOptions = [
     ...clubs?.map(club => {

@@ -9,9 +9,17 @@ export const USER_QUERY = gql`
   }
 `
 
+export const USERS_QUERY = gql`
+  query {
+    users {
+      ${USER_FRAGMENT}
+    }
+  }
+`
+
 export const UPDATE_USER_MUTATION = gql`
-  mutation ($id: Int!, $email: String, $name: String, $profileImg: String, $school: String, $desc: String, $password: String) {
-    updateUser(id: $id, email: $email, name: $name, profileImg: $profileImg, school: $school, desc: $desc, password: $password) {
+  mutation ($id: Int!, $name: String, $password: String) {
+    updateUser(id: $id, name: $name, password: $password) {
       ${USER_FRAGMENT}
     }
   }

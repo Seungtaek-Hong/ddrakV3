@@ -1,4 +1,5 @@
 import { extendType, nonNull, intArg } from 'nexus'
+import { ApolloError } from 'apollo-server-micro'
 import prisma from '@server/prisma'
 
 export const UserQuery = extendType({
@@ -16,6 +17,38 @@ export const UserQuery = extendType({
           },
           include: {
             club: true,
+          },
+        })
+      },
+    })
+
+    t.list.field('users', {
+      type: 'User',
+      resolve: async (_parent, _args, ctx) => {
+        const requester = await prisma.user.findUnique({
+          where: { id: ctx.userId },
+        })
+
+        if (!requester?.isSuper) {
+          throw new ApolloError('권한이 없습니다', null, {
+            extraCode: 'FORBIDDEN',
+          })
+        }
+
+        return prisma.user.findMany({
+          orderBy: { id: 'asc' },
+          select: {
+            id: true,
+            name: true,
+            isAdmin: true,
+            isSuper: true,
+            club: {
+              select: {
+                id: true,
+                name: true,
+                color: true,
+              },
+            },
           },
         })
       },

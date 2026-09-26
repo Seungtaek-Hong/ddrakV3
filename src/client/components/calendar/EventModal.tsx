@@ -5,8 +5,8 @@ import { TbCalendarEvent, TbClock } from 'react-icons/tb'
 
 import React, { useState, useEffect } from 'react'
 import { useQuery, useMutation } from 'react-query'
-import { userQuery, clubsQuery, updateEventMutation, deleteEventMutation } from '@client/shared/queries'
-import { useAccount, useWindowSize } from '@client/hooks'
+import { userQuery, updateEventMutation, deleteEventMutation } from '@client/shared/queries'
+import { useAccount, useClubs, useWindowSize } from '@client/hooks'
 import { isSameDateTime } from '@client/utils'
 
 import classNames from 'classnames/bind'
@@ -35,9 +35,7 @@ export default function EventModal({ event, onClose }: Props) {
   })
   const creator = creatorData?.user
 
-  const { data: clubsData } = useQuery(['clubs'], clubsQuery, {
-    enabled: !!event,
-  })
+  const { data: clubsData } = useClubs(!!event)
   const clubId = event?.extendedProps?.clubId
   const { clubs } = clubsData ?? {}
   const club = clubs?.find(club => club.id === clubId)

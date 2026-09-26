@@ -5,7 +5,7 @@ import { beResponseToEventApiArg, EventApiArg, RecurringEventApiArg } from '@roo
 
 export function useCalendarDataQuery() {
   const { date, mode } = useGlobal()
-  const { me } = useAccount()
+  const { me, isLoggedIn } = useAccount()
   const enableDefaultCalendar = mode === 'default'
   const enableClubCalendar = mode === 'clubCalendar' || mode === 'rental' || (!!me?.club && mode === 'setCalendar')
 
@@ -22,7 +22,7 @@ export function useCalendarDataQuery() {
     ],
     defaultEventsQuery,
     {
-      enabled: !!date && enableDefaultCalendar,
+      enabled: !!date && enableDefaultCalendar && isLoggedIn,
     },
   )
   const defaultEventApiArgs: RecurringEventApiArg[] =
@@ -48,7 +48,7 @@ export function useCalendarDataQuery() {
     ],
     clubEventsQuery,
     {
-      enabled: !!date && enableClubCalendar,
+      enabled: !!date && enableClubCalendar && isLoggedIn,
     },
   )
 

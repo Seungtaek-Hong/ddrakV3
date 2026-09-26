@@ -1,20 +1,20 @@
 import { useRecoilValue } from 'recoil'
 import { calendarState } from '@client/recoil/calendarApi/atoms'
-import { useAccount, useGlobal, useEvent } from '@client/hooks'
+import { useAccount, useClubs, useGlobal, useEvent } from '@client/hooks'
 
 import { queryClient } from '@client/shared/react-query'
 import { useQuery, useMutation } from 'react-query'
-import { clubsQuery, createEventsMutation, deleteEventsMutation, monthlyEventsQuery } from '@client/shared/queries'
+import { createEventsMutation, deleteEventsMutation, monthlyEventsQuery } from '@client/shared/queries'
 
 import { EventApiArg, feToBeArg, isSameDateTime, leftPadZero } from '@client/utils'
 import { NexusGenObjects } from '@root/src/shared/generated/nexus-typegen'
 
 export function useCalendar() {
   const { prev, next, today, goToDate, addEvent, getEvents, clearCalendar } = useRecoilValue(calendarState)
-  const { me } = useAccount()
+  const { me, isLoggedIn } = useAccount()
   const { timeSlots, setDraggableDuration, setTimeSlots } = useEvent()
   const { date, mode, setDate, enableDefaultMode, enableClubCalendarMode } = useGlobal()
-  const { data } = useQuery('clubs', clubsQuery)
+  const { data } = useClubs(isLoggedIn)
   const { clubs } = data ?? {}
 
   const { mutate: createEvents } = useMutation(createEventsMutation, {
