@@ -4,7 +4,7 @@ import { Input } from '@components/form'
 import { useRouter } from 'next/router'
 import { useMutation } from 'react-query'
 import React, { useState } from 'react'
-import { useAccount } from '@client/hooks'
+import { useAccount, useGlobal } from '@client/hooks'
 import { InputChangeParams } from '@shared/types'
 import { loginMutation } from '@client/shared/queries'
 import { PATHNAME } from '@root/src/client/consts'
@@ -27,6 +27,7 @@ export default function LoginPageComponent() {
     isUnauthRequired: true,
     unauthRequiredRedirectUrl: getRedirectUrl(),
   })
+  const { enableClubCalendarMode } = useGlobal()
 
   const { mutate, isLoading } = useMutation(loginMutation, {
     onSuccess: (data, _variables, _context) => {
@@ -34,6 +35,7 @@ export default function LoginPageComponent() {
         login: { token },
       } = data
       login(token)
+      enableClubCalendarMode()
     },
     onError: (_error, _variables, _context) => {
       alert('Login failed. Please try again.')
