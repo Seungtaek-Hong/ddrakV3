@@ -194,7 +194,6 @@ export default function EventModal({ event, onClose }: Props) {
                   rightAlignDropdown={isMobile}
                   value={formState.start}
                   setValue={date => handleDateChange('start', date)}
-                  use24Hour={isMobile}
                 />
               </div>
               <div className={cx('item-wrapper')}>
@@ -203,7 +202,6 @@ export default function EventModal({ event, onClose }: Props) {
                   rightAlignDropdown={isMobile}
                   value={formState.end}
                   setValue={date => handleDateChange('end', date)}
-                  use24Hour={isMobile}
                 />
               </div>
             </>

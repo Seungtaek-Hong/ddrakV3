@@ -2,7 +2,7 @@ import { DateTimePicker } from '@components/form'
 import { IoChevronBack, IoChevronForward } from 'react-icons/io5'
 
 import React, { useEffect, useState } from 'react'
-import { useAccount, useCalendar, useClubs, useEvent, useGlobal, useWindowSize } from '@client/hooks'
+import { useAccount, useCalendar, useClubs, useEvent, useGlobal } from '@client/hooks'
 
 import classNames from 'classnames/bind'
 import styles from './style/SectionMenu.module.css'
@@ -13,8 +13,6 @@ export default function AddNewEventsSlot() {
   const { renderNewEvents, setTimeSlots } = useCalendar()
   const { mode, date } = useGlobal()
   const { timeSlots } = useEvent()
-  const { width } = useWindowSize()
-  const isMobile = width <= 670
   const isRental = mode === 'rental'
   const { me } = useAccount()
   const { data } = useClubs(isRental)
@@ -124,7 +122,6 @@ export default function AddNewEventsSlot() {
               value={timeSlots[timeSlotIndex]?.start as Date}
               minuteInterval={10}
               setValue={handleStartTimeChange}
-              use24Hour={isMobile}
             />
           </div>
           <div className={cx('time-picker-wrapper')}>
@@ -133,7 +130,6 @@ export default function AddNewEventsSlot() {
               value={timeSlots[timeSlotIndex]?.end as Date}
               minuteInterval={10}
               setValue={handleEndTimeChange}
-              use24Hour={isMobile}
             />
           </div>
         </div>
