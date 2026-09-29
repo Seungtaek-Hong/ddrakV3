@@ -2,7 +2,7 @@
 
 성균관대학교 화요뜨락 시간표/일정 등록 사이트입니다. 각 동아리가 정기 모임 시간과 이벤트를 등록하고, 전체 동아리 일정을 한눈에 확인할 수 있습니다.
 
-- 배포 주소: https://ddrak2.vercel.app *(기존 ddrak.vercel.app 도메인 이관 전까지 임시 주소로 운영 중)*
+- 배포 주소: https://ddrak.vercel.app
 - 원본 저장소: [jaepang/ddrakV3](https://github.com/jaepang/ddrakV3)
 
 ## 🙏 Credit
